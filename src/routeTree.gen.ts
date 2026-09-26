@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as UnauthorizedRouteImport } from './routes/unauthorized'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const UnauthorizedRoute = UnauthorizedRouteImport.update({
+  id: '/unauthorized',
+  path: '/unauthorized',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/unauthorized': typeof UnauthorizedRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/unauthorized': typeof UnauthorizedRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/unauthorized': typeof UnauthorizedRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/unauthorized'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/unauthorized'
+  id: '__root__' | '/' | '/unauthorized'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  UnauthorizedRoute: typeof UnauthorizedRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +58,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/unauthorized': {
+      id: '/unauthorized'
+      path: '/unauthorized'
+      fullPath: '/unauthorized'
+      preLoaderRoute: typeof UnauthorizedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  UnauthorizedRoute: UnauthorizedRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
