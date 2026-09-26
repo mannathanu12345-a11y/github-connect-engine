@@ -73,11 +73,11 @@ function BatchPortal() {
     );
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8">
+    <main className="mx-auto max-w-6xl space-y-2 px-4 py-8 md:px-8 md:py-10">
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-card p-5">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border bg-card shadow-sm p-5">
         <div>
-          <h1 className="text-xl font-bold text-card-foreground">{batch.name}</h1>
+          <h1 className="text-3xl font-bold tracking-tight text-card-foreground md:text-4xl">{batch.name}</h1>
           <p className="text-xs text-muted-foreground">
             Starts {batch.startDate} · Reading days: {readingDays.join(", ") || "none set"}
           </p>
@@ -91,9 +91,9 @@ function BatchPortal() {
 
       {/* Section 1: Calendar & Offsets */}
       <section className="mt-8">
-        <h2 className="text-lg font-bold text-foreground">Batch Calendar & Offsets</h2>
+        <h2 className="text-xl font-bold text-foreground md:text-2xl">Batch Calendar & Offsets</h2>
         <div className="mt-3 grid gap-4 md:grid-cols-2">
-          <div className="rounded-xl border border-border bg-card p-4">
+          <div className="rounded-2xl border border-border bg-card shadow-sm p-4">
             <p className="text-xs font-bold text-muted-foreground">READING DAYS</p>
             <div className="mt-2 flex flex-wrap gap-2">
               {ALL_DAYS.map((d) => (
@@ -109,7 +109,7 @@ function BatchPortal() {
               ))}
             </div>
           </div>
-          <div className="rounded-xl border border-border bg-card p-4">
+          <div className="rounded-2xl border border-border bg-card shadow-sm p-4">
             <p className="text-xs font-bold text-muted-foreground">BREAKS / OFFSETS</p>
             <ul className="mt-2 space-y-1">
               {offsets.map((o) => (
@@ -140,12 +140,12 @@ function BatchPortal() {
 
       {/* Section 2: Pace Group Roster */}
       <section className="mt-8">
-        <h2 className="text-lg font-bold text-foreground">Pace Group Roster & Admin Assignments</h2>
+        <h2 className="text-xl font-bold text-foreground md:text-2xl">Pace Group Roster & Admin Assignments</h2>
         <div className="mt-3 grid gap-3 md:grid-cols-2">
           {groups.map((g) => {
             const admins = assignmentsFor(batchId, g.id).map((a) => assignments.find((x) => x.id === a.id)!);
             return (
-              <div key={g.id} className="rounded-xl border border-border bg-card p-4">
+              <div key={g.id} className="rounded-2xl border border-border bg-card shadow-sm p-4">
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-bold text-card-foreground">{g.tier}-Page Group</p>
                   <span className="text-xs text-muted-foreground">{g.memberCount} members</span>
@@ -191,8 +191,8 @@ function BatchPortal() {
 
       {/* Section 3: Batch Roadmap */}
       <section className="mt-8">
-        <h2 className="text-lg font-bold text-foreground">Batch Roadmap</h2>
-        <div className="mt-3 overflow-x-auto rounded-xl border border-border bg-card p-4">
+        <h2 className="text-xl font-bold text-foreground md:text-2xl">Batch Roadmap</h2>
+        <div className="mt-3 overflow-x-auto rounded-2xl border border-border bg-card shadow-sm p-4">
           <div className="min-w-[640px]">
             <div className="mb-2 flex gap-1 pl-20">
               {BOOKS.map((b) => (

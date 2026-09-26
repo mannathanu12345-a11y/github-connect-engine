@@ -97,11 +97,11 @@ function PaceWorkspace() {
     "w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground disabled:opacity-60";
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8">
+    <main className="mx-auto max-w-6xl space-y-2 px-4 py-8 md:px-8 md:py-10">
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-card p-5">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border bg-card shadow-sm p-5">
         <div>
-          <h1 className="text-xl font-bold text-card-foreground">
+          <h1 className="text-3xl font-bold tracking-tight text-card-foreground md:text-4xl">
             {batch.name} — {group.tier}-Page Group
           </h1>
           <p className="text-xs text-muted-foreground">
@@ -116,7 +116,7 @@ function PaceWorkspace() {
 
       {/* Section 1: Book Sequence Stepper */}
       <section className="mt-8">
-        <h2 className="text-lg font-bold text-foreground">Book Sequence</h2>
+        <h2 className="text-xl font-bold text-foreground md:text-2xl">Book Sequence</h2>
         <div className="mt-3 flex flex-wrap items-center gap-2">
           {BOOKS.map((b, i) => {
             const state =
@@ -148,7 +148,7 @@ function PaceWorkspace() {
 
       {/* Section 2: Today's Task Card */}
       <section className="mt-8">
-        <h2 className="text-lg font-bold text-foreground">
+        <h2 className="text-xl font-bold text-foreground md:text-2xl">
           Today's Task — Step {group.currentStep} of {totalSteps}
         </h2>
 
@@ -165,7 +165,7 @@ function PaceWorkspace() {
 
         <div className="mt-4 grid gap-6 lg:grid-cols-2">
           {/* Editor */}
-          <div className="space-y-3 rounded-xl border border-border bg-card p-5">
+          <div className="space-y-3 rounded-2xl border border-border bg-card shadow-sm p-5">
             <input className={inputCls} placeholder="Task title" value={task.title} disabled={!canEdit} onChange={(e) => set({ title: e.target.value })} />
             <div className="grid grid-cols-2 gap-3">
               <label className="text-xs text-muted-foreground">🇬🇧 EN pages
@@ -249,8 +249,8 @@ function PaceWorkspace() {
 
       {/* Section 3: Book Completion Handover */}
       <section className="mt-8">
-        <h2 className="text-lg font-bold text-foreground">Book Completion Handover</h2>
-        <div className="mt-3 rounded-xl border border-border bg-card p-5">
+        <h2 className="text-xl font-bold text-foreground md:text-2xl">Book Completion Handover</h2>
+        <div className="mt-3 rounded-2xl border border-border bg-card shadow-sm p-5">
           {isBookComplete ? (
             <>
               <p className="text-sm font-semibold text-card-foreground">🎉 Book Complete — {book.title}</p>
