@@ -11,6 +11,48 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { RoleProvider, useRole } from "../lib/role-context";
+import { ROLES } from "../lib/emfsc-data";
+import type { RoleId } from "../lib/emfsc-types";
+
+function RoleSwitcher() {
+  const { role, setRole } = useRole();
+  return (
+    <select
+      aria-label="Simulate role"
+      value={role}
+      onChange={(e) => setRole(e.target.value as RoleId)}
+      className="rounded-md border border-input bg-background px-2 py-1.5 text-xs font-medium text-foreground"
+    >
+      {ROLES.map((r) => (
+        <option key={r.id} value={r.id}>
+          {r.label}
+        </option>
+      ))}
+    </select>
+  );
+}
+
+function AppHeader() {
+  return (
+    <header className="sticky top-0 z-20 border-b border-border bg-background/90 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
+        <Link to="/" className="flex items-center gap-2">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">
+            E
+          </span>
+          <span className="text-sm font-bold tracking-tight text-foreground">EMFSC Curriculum</span>
+        </Link>
+        <nav className="hidden items-center gap-4 text-xs font-medium text-muted-foreground md:flex">
+          <Link to="/admin/curriculum" className="hover:text-foreground">Super Admin</Link>
+          <Link to="/batch/$batchId/curriculum" params={{ batchId: "batch-1" }} className="hover:text-foreground">Batch Portal</Link>
+          <Link to="/pace/$batchId/$groupId" params={{ batchId: "batch-1", groupId: "b1-g10" }} className="hover:text-foreground">Pace Workspace</Link>
+        </nav>
+        <RoleSwitcher />
+      </div>
+    </header>
+  );
+}
 
 function NotFoundComponent() {
   return (
@@ -77,11 +119,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "EMFSC Curriculum & Task Bank" },
+      { name: "description", content: "Role-based curriculum task bank and pacing system for EMFSC reading batches." },
+      { name: "author", content: "EMFSC" },
+      { property: "og:title", content: "EMFSC Curriculum & Task Bank" },
+      { property: "og:description", content: "Role-based curriculum task bank and pacing system for EMFSC reading batches." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
@@ -119,8 +161,11 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <RoleProvider>
+        <AppHeader />
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+      </RoleProvider>
     </QueryClientProvider>
   );
 }
