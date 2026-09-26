@@ -37,7 +37,9 @@ function AdminCurriculum() {
       const j = idx + dir;
       if (idx < 0 || j < 0 || j >= prev.length) return prev;
       const next = [...prev];
-      [next[idx], next[j]] = [next[j], next[idx]];
+      const a = next[idx]!;
+      next[idx] = next[j]!;
+      next[j] = a;
       return next.map((b, i) => ({ ...b, slot: i + 1 }));
     });
   };

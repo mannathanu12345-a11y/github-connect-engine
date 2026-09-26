@@ -239,7 +239,7 @@ function PaceWorkspace() {
               slot={book.slot}
               author={book.author}
               day={group.currentStep}
-              batchTag={batch.name.split(" ")[0] + batch.name.split(" ")[1]}
+              batchTag={batch.name.split(" ").slice(0, 2).join("")}
               paceTag={`Pace${group.tier}`}
               adminName={myAssignment?.adminName ?? "Pace Admin"}
             />
