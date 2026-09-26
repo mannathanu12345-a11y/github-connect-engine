@@ -51,7 +51,7 @@ function AdminCurriculum() {
   const activeBatches = BATCHES.filter((b) => b.status === "active");
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8">
+    <main className="mx-auto max-w-6xl space-y-2 px-4 py-8 md:px-8 md:py-10">
       {/* Header stats */}
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         {[
@@ -60,7 +60,7 @@ function AdminCurriculum() {
           { label: "Bank tasks", value: TASK_BANK.length },
           { label: "Pending revisions", value: pending.length },
         ].map((s) => (
-          <div key={s.label} className="rounded-xl border border-border bg-card p-4">
+          <div key={s.label} className="rounded-2xl border border-border bg-card shadow-sm p-4">
             <p className="text-2xl font-bold text-card-foreground">{s.value}</p>
             <p className="text-xs text-muted-foreground">{s.label}</p>
           </div>
@@ -70,7 +70,7 @@ function AdminCurriculum() {
       {/* Section 1: Global Book Catalog */}
       <section className="mt-10">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-bold text-foreground">Global Book Catalog</h2>
+          <h2 className="text-xl font-bold text-foreground md:text-2xl">Global Book Catalog</h2>
           <button
             onClick={() => setShowAdd(true)}
             className="rounded-md bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground hover:bg-primary/90"
@@ -116,9 +116,9 @@ function AdminCurriculum() {
 
       {/* Section 2: Task Bank & Revision Inbox */}
       <section className="mt-10">
-        <h2 className="text-lg font-bold text-foreground">Global Task Bank — Revision Inbox</h2>
+        <h2 className="text-xl font-bold text-foreground md:text-2xl">Global Task Bank — Revision Inbox</h2>
         {pending.length === 0 && (
-          <p className="mt-3 rounded-xl border border-border bg-card p-4 text-sm text-muted-foreground">
+          <p className="mt-3 rounded-2xl border border-border bg-card shadow-sm p-4 text-sm text-muted-foreground">
             No pending revisions. Inbox zero. 🎉
           </p>
         )}
@@ -129,7 +129,7 @@ function AdminCurriculum() {
             );
             const book = bookById(r.bookId);
             return (
-              <div key={r.id} className="rounded-xl border border-border bg-card p-4">
+              <div key={r.id} className="rounded-2xl border border-border bg-card shadow-sm p-4">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div>
                     <p className="text-sm font-semibold text-card-foreground">
@@ -194,12 +194,12 @@ function AdminCurriculum() {
 
       {/* Section 3: Cross-Batch Progression Radar */}
       <section className="mt-10">
-        <h2 className="text-lg font-bold text-foreground">Cross-Batch Progression Radar</h2>
+        <h2 className="text-xl font-bold text-foreground md:text-2xl">Cross-Batch Progression Radar</h2>
         <div className="mt-3 space-y-3">
           {BATCHES.map((batch) => {
             const groups = PACE_GROUPS.filter((g) => g.batchId === batch.id);
             return (
-              <div key={batch.id} className="rounded-xl border border-border bg-card p-4">
+              <div key={batch.id} className="rounded-2xl border border-border bg-card shadow-sm p-4">
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-semibold text-card-foreground">{batch.name}</p>
                   <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] font-medium text-muted-foreground">{batch.status}</span>
