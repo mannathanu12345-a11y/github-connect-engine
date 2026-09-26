@@ -44,7 +44,7 @@ export const BATCHES: Batch[] = [
 
 export const PACE_GROUPS: PaceGroup[] = [
   { id: "b1-g5", batchId: "batch-1", tier: 5, currentBookId: "book-2", currentStep: 4, memberCount: 32 },
-  { id: "b1-g10", batchId: "batch-1", tier: 10, currentBookId: "book-3", currentStep: 6, memberCount: 41 },
+  { id: "b1-g10", batchId: "batch-1", tier: 10, currentBookId: "book-3", currentStep: 7, memberCount: 41 },
   { id: "b1-g20", batchId: "batch-1", tier: 20, currentBookId: "book-3", currentStep: 12, memberCount: 18 },
   { id: "b1-g40", batchId: "batch-1", tier: 40, currentBookId: "book-4", currentStep: 2, memberCount: 9 },
   { id: "b2-g5", batchId: "batch-2", tier: 5, currentBookId: "book-1", currentStep: 8, memberCount: 27 },
