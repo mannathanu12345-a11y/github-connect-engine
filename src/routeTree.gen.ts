@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as UnauthorizedRouteImport } from './routes/unauthorized'
+import { Route as AdminCurriculumRouteImport } from './routes/admin.curriculum'
+import { Route as BatchBatchIdCurriculumRouteImport } from './routes/batch.$batchId.curriculum'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +24,55 @@ const UnauthorizedRoute = UnauthorizedRouteImport.update({
   path: '/unauthorized',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminCurriculumRoute = AdminCurriculumRouteImport.update({
+  id: '/admin/curriculum',
+  path: '/admin/curriculum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BatchBatchIdCurriculumRoute = BatchBatchIdCurriculumRouteImport.update({
+  id: '/batch/$batchId/curriculum',
+  path: '/batch/$batchId/curriculum',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/unauthorized': typeof UnauthorizedRoute
+  '/admin/curriculum': typeof AdminCurriculumRoute
+  '/batch/$batchId/curriculum': typeof BatchBatchIdCurriculumRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/unauthorized': typeof UnauthorizedRoute
+  '/admin/curriculum': typeof AdminCurriculumRoute
+  '/batch/$batchId/curriculum': typeof BatchBatchIdCurriculumRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/unauthorized': typeof UnauthorizedRoute
+  '/admin/curriculum': typeof AdminCurriculumRoute
+  '/batch/$batchId/curriculum': typeof BatchBatchIdCurriculumRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/unauthorized'
+  fullPaths:
+    '/' | '/unauthorized' | '/admin/curriculum' | '/batch/$batchId/curriculum'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/unauthorized'
-  id: '__root__' | '/' | '/unauthorized'
+  to: '/' | '/unauthorized' | '/admin/curriculum' | '/batch/$batchId/curriculum'
+  id:
+    | '__root__'
+    | '/'
+    | '/unauthorized'
+    | '/admin/curriculum'
+    | '/batch/$batchId/curriculum'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   UnauthorizedRoute: typeof UnauthorizedRoute
+  AdminCurriculumRoute: typeof AdminCurriculumRoute
+  BatchBatchIdCurriculumRoute: typeof BatchBatchIdCurriculumRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +91,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UnauthorizedRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/curriculum': {
+      id: '/admin/curriculum'
+      path: '/admin/curriculum'
+      fullPath: '/admin/curriculum'
+      preLoaderRoute: typeof AdminCurriculumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/batch/$batchId/curriculum': {
+      id: '/batch/$batchId/curriculum'
+      path: '/batch/$batchId/curriculum'
+      fullPath: '/batch/$batchId/curriculum'
+      preLoaderRoute: typeof BatchBatchIdCurriculumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   UnauthorizedRoute: UnauthorizedRoute,
+  AdminCurriculumRoute: AdminCurriculumRoute,
+  BatchBatchIdCurriculumRoute: BatchBatchIdCurriculumRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
